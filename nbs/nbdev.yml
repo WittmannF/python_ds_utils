@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "python_ds_utils"
+  site-url: "https://WittmannF.github.io/python_ds_utils"
+  description: "Data Science Utility Functions"
+  repo-branch: main
+  repo-url: "https://github.com/WittmannF/python_ds_utils"
