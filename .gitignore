@@ -1,6 +1,8 @@
 _docs/
 _proc/
-
+*.tsv
+catboost_training.json
+*.tfevents
 *.bak
 .gitattributes
 .last_checked
