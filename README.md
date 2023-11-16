@@ -5,7 +5,7 @@
 ## Install
 
 ``` sh
-pip install ds_utils
+pip install python_ds_utils
 ```
 
 ## Development notes
