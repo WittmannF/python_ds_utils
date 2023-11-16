@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Data Science Utility Functions">
+
+<title>python_ds_utils - ds_utils</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="python_ds_utils - ds_utils">
+<meta property="og:description" content="Data Science Utility Functions">
+<meta property="og:site-name" content="python_ds_utils">
+<meta name="twitter:title" content="python_ds_utils - ds_utils">
+<meta name="twitter:description" content="Data Science Utility Functions">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">python_ds_utils</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">ds_utils</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ds_utils</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ml</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a></li>
+  <li><a href="#development-notes" id="toc-development-notes" class="nav-link" data-scroll-target="#development-notes">Development notes</a></li>
+  <li><a href="#ml.regressorcv-class" id="toc-ml.regressorcv-class" class="nav-link" data-scroll-target="#ml.regressorcv-class"><code>ml.RegressorCV</code> Class</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#initialization" id="toc-initialization" class="nav-link" data-scroll-target="#initialization">Initialization</a></li>
+  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#ml.regressortimeseriescv-class" id="toc-ml.regressortimeseriescv-class" class="nav-link" data-scroll-target="#ml.regressortimeseriescv-class"><code>ml.RegressorTimeSeriesCV</code> Class</a>
+  <ul class="collapse">
+  <li><a href="#overview-1" id="toc-overview-1" class="nav-link" data-scroll-target="#overview-1">Overview</a></li>
+  <li><a href="#initialization-1" id="toc-initialization-1" class="nav-link" data-scroll-target="#initialization-1">Initialization</a></li>
+  <li><a href="#attributes-1" id="toc-attributes-1" class="nav-link" data-scroll-target="#attributes-1">Attributes</a></li>
+  <li><a href="#methods-1" id="toc-methods-1" class="nav-link" data-scroll-target="#methods-1">Methods</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  </ul></li>
+  <li><a href="#ml.knnregressor-class" id="toc-ml.knnregressor-class" class="nav-link" data-scroll-target="#ml.knnregressor-class"><code>ml.KNNRegressor</code> Class</a>
+  <ul class="collapse">
+  <li><a href="#overview-2" id="toc-overview-2" class="nav-link" data-scroll-target="#overview-2">Overview</a></li>
+  <li><a href="#initialization-2" id="toc-initialization-2" class="nav-link" data-scroll-target="#initialization-2">Initialization</a></li>
+  <li><a href="#methods-2" id="toc-methods-2" class="nav-link" data-scroll-target="#methods-2">Methods</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
+  </ul></li>
+  <li><a href="#ml.autoregressor-class" id="toc-ml.autoregressor-class" class="nav-link" data-scroll-target="#ml.autoregressor-class"><code>ml.AutoRegressor</code> Class</a>
+  <ul class="collapse">
+  <li><a href="#overview-3" id="toc-overview-3" class="nav-link" data-scroll-target="#overview-3">Overview</a></li>
+  <li><a href="#initialization-3" id="toc-initialization-3" class="nav-link" data-scroll-target="#initialization-3">Initialization</a></li>
+  <li><a href="#methods-3" id="toc-methods-3" class="nav-link" data-scroll-target="#methods-3">Methods</a></li>
+  <li><a href="#example-usage" id="toc-example-usage" class="nav-link" data-scroll-target="#example-usage">Example Usage</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/WittmannF/python_ds_utils/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ds_utils</h1>
+</div>
+
+<div>
+  <div class="description">
+    Data Science Utility Functions
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="install" class="level2">
+<h2 class="anchored" data-anchor-id="install">Install</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install ds_utils</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="development-notes" class="level2">
+<h2 class="anchored" data-anchor-id="development-notes">Development notes</h2>
+<p>This library has been developed using <a href="https://nbdev.fast.ai">nbdev</a>. Any change or PR has to be made directly to the notebooks that creates each module. All tests must pass.</p>
+</section>
+<section id="ml.regressorcv-class" class="level2">
+<h2 class="anchored" data-anchor-id="ml.regressorcv-class"><code>ml.RegressorCV</code> Class</h2>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>The <a href="https://WittmannF.github.io/python_ds_utils/ml.html#regressorcv"><code>RegressorCV</code></a> class in the <code>ml.py</code> module of the <code>ds_utils</code> library is designed to train an estimator using cross-validation and record metrics for each fold. It also stores each model that is trained on each fold of the cross-validation process. The final prediction is made as the median value of the predictions from each stored model.</p>
+</section>
+<section id="initialization" class="level3">
+<h3 class="anchored" data-anchor-id="initialization">Initialization</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>RegressorCV(base_reg, cv<span class="op">=</span><span class="dv">5</span>, groups<span class="op">=</span><span class="va">None</span>, verbose<span class="op">=</span><span class="va">False</span>, n_bins_stratify<span class="op">=</span><span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="parameters" class="level4">
+<h4 class="anchored" data-anchor-id="parameters">Parameters</h4>
+<ul>
+<li><code>base_reg</code> : Estimator object implementing ‘fit’. The object to use to fit the data.</li>
+<li><code>cv</code> : int or cross-validation generator, default=5. Determines the cross-validation splitting strategy.</li>
+<li><code>groups</code> : array-like of shape (n_samples,), default=None. Group labels for the samples used while splitting the dataset into train/test set.</li>
+<li><code>n_bins_stratify</code> : int, default=None. Number of bins to use for stratification.</li>
+<li><code>verbose</code> : bool, default=False. Whether or not to print metrics.</li>
+</ul>
+</section>
+</section>
+<section id="attributes" class="level3">
+<h3 class="anchored" data-anchor-id="attributes">Attributes</h3>
+<ul>
+<li><code>cv_results_</code> : Dictionary containing the results of the cross-validation, including the fold number, the regressor, and the metrics.</li>
+<li><code>oof_train_</code> : Series containing the out-of-fold predictions on the training set.</li>
+<li><code>oof_score_</code> : The R2 score calculated using the out-of-fold predictions.</li>
+<li><code>oof_mape_</code> : The Mean Absolute Percentage Error calculated using the out-of-fold predictions.</li>
+<li><code>oof_rmse_</code> : The Root Mean Squared Error calculated using the out-of-fold predictions.</li>
+<li><code>metrics_</code> : The summary of metrics calculated during the fitting process.</li>
+</ul>
+</section>
+<section id="methods" class="level3">
+<h3 class="anchored" data-anchor-id="methods">Methods</h3>
+<section id="fitself-x-y-kwargs" class="level4">
+<h4 class="anchored" data-anchor-id="fitself-x-y-kwargs">fit(self, X, y, **kwargs)</h4>
+<p>Trains the base regressor on the provided data using cross-validation and stores the results.</p>
+</section>
+<section id="predictself-x" class="level4">
+<h4 class="anchored" data-anchor-id="predictself-x">predict(self, X)</h4>
+<p>Predicts the target variable for the provided features using the median value of the predictions from the models trained during cross-validation.</p>
+</section>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ds_utils.ml <span class="im">import</span> RegressorCV</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the RegressorCV with a base regressor and cross-validation strategy</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>reg_cv <span class="op">=</span> RegressorCV(base_reg<span class="op">=</span>RandomForestRegressor(), cv<span class="op">=</span><span class="dv">5</span>, verbose<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the RegressorCV to the training data</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>reg_cv.fit(X_train, y_train)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the target variable for new data</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> reg_cv.predict(X_new)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the summary of recorded metrics</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> reg_cv.metrics_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="ml.regressortimeseriescv-class" class="level2">
+<h2 class="anchored" data-anchor-id="ml.regressortimeseriescv-class"><code>ml.RegressorTimeSeriesCV</code> Class</h2>
+<section id="overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="overview-1">Overview</h3>
+<p>The <a href="https://WittmannF.github.io/python_ds_utils/ml.html#regressortimeseriescv"><code>RegressorTimeSeriesCV</code></a> class in the <code>ml.py</code> module of the <code>ds_utils</code> library is designed to train a base regressor using time series cross-validation and record metrics for each fold.</p>
+</section>
+<section id="initialization-1" class="level3">
+<h3 class="anchored" data-anchor-id="initialization-1">Initialization</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>RegressorTimeSeriesCV(base_reg, cv<span class="op">=</span><span class="dv">5</span>, verbose<span class="op">=</span><span class="va">False</span>, catboost_use_eval_set<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="parameters-1" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-1">Parameters</h4>
+<ul>
+<li><code>base_reg</code> : Estimator object implementing ‘fit’. The object to use to fit the data.</li>
+<li><code>cv</code> : int, default=5. Determines the cross-validation splitting strategy.</li>
+<li><code>verbose</code> : bool, default=False. Whether or not to print metrics.</li>
+<li><code>catboost_use_eval_set</code> : bool, default=False. Whether or not to use eval_set in CatBoostRegressor.</li>
+</ul>
+</section>
+</section>
+<section id="attributes-1" class="level3">
+<h3 class="anchored" data-anchor-id="attributes-1">Attributes</h3>
+<ul>
+<li><code>cv_results_</code> : List containing the results of the cross-validation, including fold number, regressor, train and test indices, and metrics.</li>
+<li><code>metrics_</code> : The summary of metrics calculated during the fitting process.</li>
+<li><code>y_test_last_fold_</code> : The true target variable values of the last fold.</li>
+<li><code>y_pred_last_fold_</code> : The predicted target variable values of the last fold.</li>
+</ul>
+</section>
+<section id="methods-1" class="level3">
+<h3 class="anchored" data-anchor-id="methods-1">Methods</h3>
+<section id="fitself-x-y-sample_weightnone" class="level4">
+<h4 class="anchored" data-anchor-id="fitself-x-y-sample_weightnone">fit(self, X, y, sample_weight=None)</h4>
+<p>Trains the base regressor on the provided data using time series cross-validation and stores the results.</p>
+</section>
+<section id="predictself-x-1" class="level4">
+<h4 class="anchored" data-anchor-id="predictself-x-1">predict(self, X)</h4>
+<p>Predicts the target variable for the provided features using the base regressor trained on the full data.</p>
+</section>
+</section>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ds_utils.ml <span class="im">import</span> RegressorTimeSeriesCV</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the RegressorTimeSeriesCV with a base regressor and cross-validation strategy</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>reg_tscv <span class="op">=</span> RegressorTimeSeriesCV(base_reg<span class="op">=</span>RandomForestRegressor(), cv<span class="op">=</span><span class="dv">5</span>, verbose<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the RegressorTimeSeriesCV to the training data</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>reg_tscv.fit(X_train, y_train)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the target variable for new data</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> reg_tscv.predict(X_new)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the summary of recorded metrics</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> reg_tscv.metrics_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="ml.knnregressor-class" class="level2">
+<h2 class="anchored" data-anchor-id="ml.knnregressor-class"><code>ml.KNNRegressor</code> Class</h2>
+<section id="overview-2" class="level3">
+<h3 class="anchored" data-anchor-id="overview-2">Overview</h3>
+<p>The <a href="https://WittmannF.github.io/python_ds_utils/ml.html#knnregressor"><code>KNNRegressor</code></a> class in the <code>ml.py</code> module of the <code>ds_utils</code> library is an extension of the <code>KNeighborsRegressor</code> from scikit-learn, with modifications to the <code>predict</code> method to allow different calculations for predictions and to optionally return the indices of the nearest neighbors.</p>
+</section>
+<section id="initialization-2" class="level3">
+<h3 class="anchored" data-anchor-id="initialization-2">Initialization</h3>
+<p>The initialization parameters are the same as those of the <code>KNeighborsRegressor</code> from scikit-learn. Refer to the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html">official documentation</a> for details on the parameters.</p>
+</section>
+<section id="methods-2" class="level3">
+<h3 class="anchored" data-anchor-id="methods-2">Methods</h3>
+<section id="predictself-x-return_match_indexfalse-pred_calcmean" class="level4">
+<h4 class="anchored" data-anchor-id="predictself-x-return_match_indexfalse-pred_calcmean">predict(self, X, return_match_index=False, pred_calc=‘mean’)</h4>
+<p>Predicts the target variable for the provided features and allows different calculations for predictions.</p>
+<section id="parameters-2" class="level5">
+<h5 class="anchored" data-anchor-id="parameters-2">Parameters</h5>
+<ul>
+<li><code>X</code> : array-like of shape (n_samples, n_features). Test samples.</li>
+<li><code>return_match_index</code> : bool, default=False. Whether to return the index of the nearest matched neighbor.</li>
+<li><code>pred_calc</code> : str, default=‘mean’. The calculation to use for predictions. Possible values are ‘mean’ and ‘median’.</li>
+</ul>
+</section>
+<section id="returns" class="level5">
+<h5 class="anchored" data-anchor-id="returns">Returns</h5>
+<ul>
+<li><code>y_pred</code> : array of shape (n_samples,) or (n_samples, n_outputs). The predicted target variable.</li>
+<li><code>nearest_matched_index</code> : array of shape (n_samples,). The index of the nearest matched neighbor. Returned only if <code>return_match_index=True</code>.</li>
+<li><code>neigh_ind</code> : array of shape (n_samples, n_neighbors). Indices of the neighbors in the training set. Returned only if <code>return_match_index=True</code>.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">Example</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ds_utils.ml <span class="im">import</span> KNNRegressor</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the KNNRegressor with specific parameters</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>knn_reg <span class="op">=</span> KNNRegressor(n_neighbors<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the KNNRegressor to the training data</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>knn_reg.fit(X_train, y_train)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the target variable for new data and return the index of the nearest matched neighbor</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>predictions, nearest_matched_index, neigh_ind <span class="op">=</span> knn_reg.predict(X_new, return_match_index<span class="op">=</span><span class="va">True</span>, pred_calc<span class="op">=</span><span class="st">'median'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="ml.autoregressor-class" class="level2">
+<h2 class="anchored" data-anchor-id="ml.autoregressor-class"><code>ml.AutoRegressor</code> Class</h2>
+<section id="overview-3" class="level3">
+<h3 class="anchored" data-anchor-id="overview-3">Overview</h3>
+<p>The <a href="https://WittmannF.github.io/python_ds_utils/ml.html#autoregressor"><code>AutoRegressor</code></a> class is designed for performing automated regression tasks, including preprocessing and model fitting. It supports several regression algorithms and allows for easy comparison of their performance on a given dataset. The class provides various methods for model evaluation, feature importance, and visualization.</p>
+</section>
+<section id="initialization-3" class="level3">
+<h3 class="anchored" data-anchor-id="initialization-3">Initialization</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ar <span class="op">=</span> AutoRegressor(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    num_cols,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    cat_cols,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    target_col,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    train<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    test<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    random_st<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    log_target<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span><span class="st">'catboost'</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    imputer_strategy<span class="op">=</span><span class="st">'simple'</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    use_catboost_native_cat_features<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    ohe_min_freq<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    scale_numeric_data<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    scale_categoric_data<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    scale_target<span class="op">=</span><span class="va">False</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="parameters-3" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-3">Parameters</h4>
+<ul>
+<li><strong>num_cols</strong>: list
+<ul>
+<li>List of numerical columns in the dataset.</li>
+</ul></li>
+<li><strong>cat_cols</strong>: list
+<ul>
+<li>List of categorical columns in the dataset.</li>
+</ul></li>
+<li><strong>target_col</strong>: str
+<ul>
+<li>Target column name in the dataset.</li>
+</ul></li>
+<li><strong>data</strong>: pd.DataFrame, optional (default=None)
+<ul>
+<li>Input dataset containing both features and target column.</li>
+</ul></li>
+<li><strong>train</strong>: pd.DataFrame, optional (default=None)
+<ul>
+<li>Training dataset containing both features and target column. Used if <code>data</code> is not provided.</li>
+</ul></li>
+<li><strong>test</strong>: pd.DataFrame, optional (default=None)
+<ul>
+<li>Testing dataset containing both features and target column. Used if <code>data</code> is not provided.</li>
+</ul></li>
+<li><strong>random_st</strong>: int, optional (default=42)
+<ul>
+<li>Random state for reproducibility.</li>
+</ul></li>
+<li><strong>log_target</strong>: bool, optional (default=False)
+<ul>
+<li>If the logarithm of the target variable should be used.</li>
+</ul></li>
+<li><strong>estimator</strong>: str or estimator object, optional (default=‘catboost’)
+<ul>
+<li>String or estimator object. Options are ‘catboost’, ‘random_forest’, and ‘linear’.</li>
+</ul></li>
+<li><strong>imputer_strategy</strong>: str, optional (default=‘simple’)
+<ul>
+<li>Imputation strategy for missing values. Options are ‘simple’ and ‘knn’.</li>
+</ul></li>
+<li><strong>use_catboost_native_cat_features</strong>: bool, optional (default=False)
+<ul>
+<li>If the native CatBoost categorical feature handling should be used.</li>
+</ul></li>
+<li><strong>ohe_min_freq</strong>: float, optional (default=0.05)
+<ul>
+<li>Minimum frequency for OneHotEncoder to consider a category in categorical columns.</li>
+</ul></li>
+<li><strong>scale_numeric_data</strong>: bool, optional (default=False)
+<ul>
+<li>If numeric data should be scaled using StandardScaler.</li>
+</ul></li>
+<li><strong>scale_categoric_data</strong>: bool, optional (default=False)
+<ul>
+<li>If categorical data (after one-hot encoding) should be scaled using StandardScaler.</li>
+</ul></li>
+<li><strong>scale_target</strong>: bool, optional (default=False)
+<ul>
+<li>If the target variable should be scaled using StandardScaler.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="methods-3" class="level3">
+<h3 class="anchored" data-anchor-id="methods-3">Methods</h3>
+<section id="fit_reportself" class="level4">
+<h4 class="anchored" data-anchor-id="fit_reportself">fit_report(self)</h4>
+<p>Fits the model to the training data and prints the R2 Score, RMSE, and MAPE on the test data.</p>
+</section>
+<section id="test_binary_columnself-binary_column" class="level4">
+<h4 class="anchored" data-anchor-id="test_binary_columnself-binary_column">test_binary_column(self, binary_column)</h4>
+<p>Tests the significance of a binary column on the target variable and returns the p-value for Mann–Whitney U test.</p>
+</section>
+<section id="get_coefficientsself" class="level4">
+<h4 class="anchored" data-anchor-id="get_coefficientsself">get_coefficients(self)</h4>
+<p>Returns the coefficients of the model if the estimator is linear, otherwise returns feature importances.</p>
+</section>
+<section id="get_feature_importancesself" class="level4">
+<h4 class="anchored" data-anchor-id="get_feature_importancesself">get_feature_importances(self)</h4>
+<p>Returns the feature importances of the model.</p>
+</section>
+<section id="get_shapself-return_shap_valuesfalse" class="level4">
+<h4 class="anchored" data-anchor-id="get_shapself-return_shap_valuesfalse">get_shap(self, return_shap_values=False)</h4>
+<p>Generates and plots SHAP values for the model and returns SHAP values if <code>return_shap_values</code> is True.</p>
+</section>
+<section id="plot_importanceself-feat_imp-graph_titlemodel-feature-importance" class="level4">
+<h4 class="anchored" data-anchor-id="plot_importanceself-feat_imp-graph_titlemodel-feature-importance">plot_importance(self, feat_imp, graph_title=“Model feature importance”)</h4>
+<p>Plots the feature importances provided in <code>feat_imp</code> with the specified <code>graph_title</code>.</p>
+</section>
+</section>
+<section id="example-usage" class="level3">
+<h3 class="anchored" data-anchor-id="example-usage">Example Usage</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize AutoRegressor</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ar <span class="op">=</span> AutoRegressor(num_cols, cat_cols, target_col, data)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model and print the report</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ar.fit_report()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Get and plot feature importances</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>feat_imp <span class="op">=</span> ar.get_feature_importances()</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ar.plot_importance(feat_imp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
